@@ -1,16 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import { HashRouter, Route, Routes } from 'react-router'
-import Home from './components/Home'
+import { HashRouter, Routes, Route } from 'react-router-dom'
+import Home from './screens/Home'
+import Events from './screens/Events'
+import SignUp from './screens/SignUp'
+import About from './screens/About'
+import Contact from './screens/Contact'
+import Header from './components/Header'
 
 function App() {
-  return <HashRouter>
-      <Routes>
-        <Route path="/" element={<Home></Home>}></Route>
-      </Routes>
+  return (
+    <HashRouter>
+      <Header />
+      <main style={{ padding: '1rem', paddingTop: '84px' }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </main>
     </HashRouter>
+  )
 }
 
 export default App
