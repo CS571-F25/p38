@@ -7,6 +7,7 @@ export default function About() {
   return (
     <Container className="mt-4">
       <h1>About MadCloud</h1>
+      <p className="lead">MadCloud is a student-run club dedicated to cloud computing, distributed systems, and collaborative projects. We host workshops, hack nights, and guest talks to help members build real-world skills and connect with peers and industry mentors.</p>
       <section style={{ marginTop: 24 }}>
         <h2>MadCloud Board</h2>
         <Row className="mt-4">
