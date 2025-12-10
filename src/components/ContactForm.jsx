@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
-import { Form, Button, Alert } from 'react-bootstrap'
+import { Form, Button, Alert, Spinner } from 'react-bootstrap'
 import { motion } from 'framer-motion'
+import emailjs from '@emailjs/browser'
 
 export default function ContactForm({ onSubmit }) {
     const [form, setForm] = useState({ name: '', email: '', message: '' })
     const [submitted, setSubmitted] = useState(false)
+    const [error, setError] = useState(false)
+    const [sending, setSending] = useState(false)
 
     function handleChange(e) {
         const { name, value } = e.target
@@ -13,10 +16,37 @@ export default function ContactForm({ onSubmit }) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        if (onSubmit) onSubmit(form)
-        setSubmitted(true)
-        setTimeout(() => setSubmitted(false), 3000)
-        setForm({ name: '', email: '', message: '' })
+        setSending(true)
+        setError(false)
+        setSubmitted(false)
+
+        // EmailJS configuration
+        const serviceID = 'service_gbl5tyi'
+        const templateID = 'template_5cybf1k'
+        const publicKey = 'Dd95P3Cbu601cF1--'
+
+        const templateParams = {
+            from_name: form.name,
+            from_email: form.email,
+            message: form.message,
+            to_email: 'uwmadcloud@gmail.com'
+        }
+
+        emailjs.send(serviceID, templateID, templateParams, publicKey)
+            .then((response) => {
+                console.log('Email sent successfully!', response.status, response.text)
+                setSubmitted(true)
+                setForm({ name: '', email: '', message: '' })
+                setTimeout(() => setSubmitted(false), 5000)
+                setSending(false)
+                if (onSubmit) onSubmit(form)
+            })
+            .catch((error) => {
+                console.error('Failed to send email:', error)
+                setError(true)
+                setTimeout(() => setError(false), 5000)
+                setSending(false)
+            })
     }
 
     return (
@@ -32,7 +62,19 @@ export default function ContactForm({ onSubmit }) {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                 >
-                    <Alert variant="success">Your message has been sent (demo).</Alert>
+                    <Alert variant="success">
+                        ✓ Your message has been sent successfully! We'll get back to you soon.
+                    </Alert>
+                </motion.div>
+            )}
+            {error && (
+                <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                >
+                    <Alert variant="danger">
+                        ✗ Failed to send message. Please check your EmailJS configuration or try again later.
+                    </Alert>
                 </motion.div>
             )}
             <Form onSubmit={handleSubmit}>
@@ -45,6 +87,7 @@ export default function ContactForm({ onSubmit }) {
                         value={form.name}
                         onChange={handleChange}
                         required
+                        disabled={sending}
                     />
                 </Form.Group>
 
@@ -57,6 +100,7 @@ export default function ContactForm({ onSubmit }) {
                         value={form.email}
                         onChange={handleChange}
                         required
+                        disabled={sending}
                     />
                 </Form.Group>
 
@@ -70,12 +114,27 @@ export default function ContactForm({ onSubmit }) {
                         value={form.message}
                         onChange={handleChange}
                         required
+                        disabled={sending}
                     />
                 </Form.Group>
 
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <Button variant="primary" type="submit" className="w-100">
-                        Send
+                <motion.div whileHover={{ scale: sending ? 1 : 1.05 }} whileTap={{ scale: sending ? 1 : 0.95 }}>
+                    <Button variant="primary" type="submit" className="w-100" disabled={sending}>
+                        {sending ? (
+                            <>
+                                <Spinner
+                                    as="span"
+                                    animation="border"
+                                    size="sm"
+                                    role="status"
+                                    aria-hidden="true"
+                                    className="me-2"
+                                />
+                                Sending...
+                            </>
+                        ) : (
+                            'Send Message'
+                        )}
                     </Button>
                 </motion.div>
             </Form>
