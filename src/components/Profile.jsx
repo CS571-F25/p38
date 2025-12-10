@@ -1,4 +1,5 @@
 import React from 'react'
+import { Card } from 'react-bootstrap'
 import './Profile.css'
 
 export default function Profile({ first = '', last = '', img = '', title = '', email = '' }) {
@@ -6,23 +7,23 @@ export default function Profile({ first = '', last = '', img = '', title = '', e
   const initials = `${first?.[0] || ''}${last?.[0] || ''}`.toUpperCase()
 
   return (
-    <div className="profile">
-      <div className="avatar">
-        {img ? (
-          <img src={img} alt={name || 'Profile'} />
-        ) : (
-          <div className="placeholder">{initials || '?'}</div>
-        )}
-      </div>
-      <div className="info">
-        <div className="name">{name || 'Unnamed'}</div>
-        {title && <div className="title">{title}</div>}
+    <Card className="h-100 text-center profile-card">
+      <Card.Body>
+        <div className="avatar mb-3">
+          {img ? (
+            <img src={img} alt={name || 'Profile'} className="rounded-circle" />
+          ) : (
+            <div className="placeholder rounded-circle">{initials || '?'}</div>
+          )}
+        </div>
+        <Card.Title className="mb-2">{name || 'Unnamed'}</Card.Title>
+        {title && <Card.Subtitle className="mb-3 text-muted">{title}</Card.Subtitle>}
         {email && (
-          <div className="email">
-            <a href={`mailto:${email}`}>{email}</a>
-          </div>
+          <Card.Link href={`mailto:${email}`} className="d-block">
+            {email}
+          </Card.Link>
         )}
-      </div>
-    </div>
+      </Card.Body>
+    </Card>
   )
 }

@@ -8,8 +8,8 @@ export default function Contact() {
   }
 
   return (
-    <Container className="mt-4">
-      <h1>Contact MadCloud</h1>
+    <Container className="mt-4" style={{ maxWidth: '600px' }}>
+      <h1 className="text-center">Contact MadCloud</h1>
       <Alert variant="info" className="mt-3">
         If you'd like to reach out, email us at <Alert.Link href="mailto:info@madcloud.example">info@madcloud.example</Alert.Link> or fill out the form below.
       </Alert>

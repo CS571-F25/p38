@@ -6,20 +6,24 @@ import SignUp from './screens/SignUp'
 import About from './screens/About'
 import Contact from './screens/Contact'
 import Header from './components/Header'
+import Footer from './components/Footer'
 
 function App() {
   return (
     <HashRouter>
-      <Header />
-      <main style={{ padding: '1rem', paddingTop: '84px' }}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/events" element={<Events />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </main>
+      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        <Header />
+        <main style={{ padding: '1rem', paddingTop: '84px', minHeight: '90vh' }}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
     </HashRouter>
   )
 }
