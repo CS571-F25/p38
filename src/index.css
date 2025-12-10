@@ -1,11 +1,27 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap');
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+:root {
+  /* Badger Red Theme */
+  --badger-red: #c5050c;
+  --badger-red-dark: #9b0000;
+  --badger-red-light: #e74c3c;
+  --white: #ffffff;
+  --gray-light: #f8f9fa;
+  --gray-medium: #dee2e6;
+  --gray-dark: #495057;
+  --text-dark: #1a1a1a;
+  
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-shadow: 0 8px 32px 0 rgba(197, 5, 12, 0.15);
+  
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+  color: var(--text-dark);
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #fff5f5 100%);
+  min-height: 100vh;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,19 +29,34 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  scroll-behavior: smooth;
+}
+
 a {
   font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  color: var(--badger-red);
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
+
 a:hover {
-  color: #535bf2;
+  color: var(--badger-red-dark);
+  text-decoration: underline;
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #fff5f5 100%);
+  background-attachment: fixed;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  color: var(--text-dark);
 }
 
 h1 {
@@ -33,34 +64,116 @@ h1 {
   line-height: 1.1;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+/* Glassmorphism Button Styles */
+.btn, button, .btn-primary, .btn-success, .btn-info {
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+  background: linear-gradient(135deg, var(--badger-red) 0%, var(--badger-red-dark) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 12px !important;
+  padding: 0.75em 1.5em;
   font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  color: white !important;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(197, 5, 12, 0.3);
+  position: relative;
+  overflow: hidden;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.btn::before, button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn:hover::before, button:hover::before {
+  left: 100%;
+}
+
+.btn:hover, button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(197, 5, 12, 0.4);
+  border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.btn:active, button:active {
+  transform: translateY(0);
+}
+
+.btn:focus,
+button:focus,
+button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(197, 5, 12, 0.3);
+}
+
+/* Card Glassmorphism */
+.card {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.75) !important;
+  border: 1px solid rgba(197, 5, 12, 0.2) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 32px 0 rgba(197, 5, 12, 0.1) !important;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px 0 rgba(197, 5, 12, 0.2) !important;
+}
+
+/* Form Input Glassmorphism */
+.form-control, .form-select {
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(197, 5, 12, 0.2) !important;
+  border-radius: 10px !important;
+  padding: 0.75rem 1rem !important;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border-color: var(--badger-red) !important;
+  box-shadow: 0 0 0 0.25rem rgba(197, 5, 12, 0.15) !important;
+  transform: translateY(-2px);
+}
+
+.form-label {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+}
+
+/* Alert Glassmorphism */
+.alert {
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+  border-radius: 12px !important;
+  border: 1px solid rgba(197, 5, 12, 0.2);
+  font-weight: 500;
+}
+
+.alert-success {
+  background-color: rgba(40, 167, 69, 0.15) !important;
+  border-color: rgba(40, 167, 69, 0.3) !important;
+  color: #155724 !important;
+}
+
+.alert-info {
+  background-color: rgba(23, 162, 184, 0.15) !important;
+  border-color: rgba(23, 162, 184, 0.3) !important;
+  color: #0c5460 !important;
 }
