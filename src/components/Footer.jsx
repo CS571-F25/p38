@@ -9,10 +9,10 @@ export default function Footer() {
       <Container>
         <Row className="footer-content align-items-start justify-content-around">
           <Col xs="auto" className="footer-brand text-start">
-            <h3>MadCloud</h3>
+            <p className="h2 mb-0">MadCloud</p>
           </Col>
           <Col xs="auto" className="footer-links text-start">
-            <h4>Quick Links</h4>
+            <p className="h3 mb-2">Quick Links</p>
             <ul className="list-unstyled">
               <li><Link to="/" className="text-decoration-none">Home</Link></li>
               <li><Link to="/events" className="text-decoration-none">Events</Link></li>

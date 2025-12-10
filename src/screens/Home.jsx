@@ -1,5 +1,6 @@
 import React from 'react'
 import { Container, Card, Button, Row, Col } from 'react-bootstrap'
+import BenefitsList from '../components/BenefitsList'
 
 export default function Home() {
   return (
@@ -53,23 +54,8 @@ export default function Home() {
       </Row>
 
       <div className="mt-5 p-4 pb-4 bg-light rounded mb-4">
-        <h3 className="text-center mb-3">Why Join MadCloud?</h3>
-        <Row>
-          <Col md={6}>
-            <ul className="list-unstyled">
-              <li className="mb-2">✓ Free access to cloud platform workshops and resources</li>
-              <li className="mb-2">✓ AWS, Azure, and GCP certification preparation</li>
-              <li className="mb-2">✓ Hands-on project experience for your resume</li>
-            </ul>
-          </Col>
-          <Col md={6}>
-            <ul className="list-unstyled">
-              <li className="mb-2">✓ Networking with tech industry professionals</li>
-              <li className="mb-2">✓ Career development and internship opportunities</li>
-              <li className="mb-2">✓ Inclusive community welcoming all skill levels</li>
-            </ul>
-          </Col>
-        </Row>
+        <h2 className="text-center mb-3">Why Join MadCloud?</h2>
+        <BenefitsList />
       </div>
     </Container>
   )
