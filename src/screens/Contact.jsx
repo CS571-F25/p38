@@ -34,7 +34,7 @@ export default function Contact() {
             borderRadius: '12px'
           }}
         >
-          If you'd like to reach out, email us at <Alert.Link href="mailto:info@madcloud.example" style={{ fontWeight: 700, color: 'var(--badger-red)' }}>info@madcloud.example</Alert.Link> or fill out the form below.
+          If you'd like to reach out, email us at <Alert.Link href="mailto:uwmadcloud@gmail.com" style={{ fontWeight: 700, color: 'var(--badger-red)' }}>uwmadcloud@gmail.com</Alert.Link> or fill out the form below.
         </Alert>
 
         <ContactForm onSubmit={handleSubmit} />
