@@ -2,6 +2,7 @@ import React from 'react'
 import { Container, ListGroup } from 'react-bootstrap'
 import { motion } from 'framer-motion'
 import Event from '../components/Event'
+import Hero from '../components/Hero'
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -49,14 +50,10 @@ function Events() {
 
   return (
     <Container className="mt-4">
-      <motion.h1
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        style={{ fontFamily: 'Outfit', fontWeight: 800, color: 'var(--badger-red)' }}
-      >
-        Upcoming Events
-      </motion.h1>
+      <Hero 
+        title="Upcoming Events" 
+        subtitle="Join us for workshops, study sessions, and networking opportunities"
+      />
       <motion.div
         variants={containerVariants}
         initial="hidden"
